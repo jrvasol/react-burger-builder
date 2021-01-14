@@ -1,0 +1,11 @@
+.logo-container {
+    height: 100%;
+    background-color: white;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 5px; 
+}
+
+.logo {
+    height: 100%;
+}
