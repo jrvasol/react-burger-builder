@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Aux from '../../../hoc/Aux';
+import Aux from '../../../hoc/Auxiliary';
 import Button from '../../UI/Button/Button';
 
 const OrderSummary = (props) => {

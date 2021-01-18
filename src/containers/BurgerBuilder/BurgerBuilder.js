@@ -8,7 +8,7 @@ import {purchaseInit} from '../../store/actions/order';
 import {setAuthRedirectPath} from '../../store/actions/auth';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import Aux from '../../hoc/Aux';
+import Aux from '../../hoc/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';

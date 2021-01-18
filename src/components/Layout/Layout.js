@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Aux from '../../hoc/Aux';
+import Aux from '../../hoc/Auxiliary';
 import Modal from 'react-modal';
 import styles from './Layout.module.css';
 import '../../assets/css/SideDrawer.css';
