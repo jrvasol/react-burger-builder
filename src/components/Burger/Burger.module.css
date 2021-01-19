@@ -1,6 +1,6 @@
 .burger-container {
-    height: 250px;
-    width: 100%;
+    height: auto;
+    width: 250px;
     margin: auto;
     overflow: scroll;
     text-align: center;

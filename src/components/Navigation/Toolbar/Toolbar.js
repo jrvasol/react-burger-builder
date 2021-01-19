@@ -7,17 +7,21 @@ import Logo from '../../Logo/Logo';
 
 const Toolbar = (props) => (
     <header className={styles['toolbar']}>
-        <div className={styles['toolbar-menu-btn']} onClick={props.openMenu}>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
         <div className={styles['toolbar-logo']}>
             <Logo/>
         </div>
-        <nav> 
-            <NavigationItems/>
-        </nav>
+
+        <div className={styles['toolbar-nav']}>
+            <div className={styles['toolbar-menu-btn']} onClick={props.openMenu}>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <nav> 
+                <NavigationItems/>
+            </nav>
+        </div>
     </header>
 )
 

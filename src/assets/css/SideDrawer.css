@@ -9,14 +9,14 @@
 }
 
 .side-drawer {
-    left: 0;
+    position: fixed;
     top: 0;
-    right: auto;
-    bottom: 0; 
+    right: 0;
+    bottom: 0;  
     height: 100%;
     width: 280px;
     background-color: white; 
-    transform: translateX(-100%);
+    transform: translateX(100%);
     transition: .10s transform ease-in;
 }
 
@@ -29,5 +29,5 @@
 }
 
 .side-drawer.ReactModal__Content--before-close {
-    transform: translateX(-100%); 
+    transform: translateX(100%); 
 }
