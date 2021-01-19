@@ -2,45 +2,35 @@ import {ADD_INGREDIENT, REMOVE_INGREDIENT, SET_INGREDIENTS, SET_INGREDIENTS_FAIL
 
 const initialState = {
     ingredients: null,
+    activeIngredients: [],
     totalPrice: 400,
     error: false,
     building: false
 };
 
-const INGREDIENT_PRICE = {
-    salad: 50,
-    cheese: 40,
-    meat: 130,
-    bacon: 70
-}
-
 const burgerBuilder = (state = initialState, action) => {
     switch (action.type) {
         case ADD_INGREDIENT:
             {
-                const updatedIngredients = {
-                    ...state.ingredients,
-                    [action.ingredient]: state.ingredients[action.ingredient] + 1
-                };
+                const activeIngs = [action.ingredient, ...state.activeIngredients];
 
                 return {
                     ...state,
-                    ingredients: updatedIngredients,
-                    totalPrice: state.totalPrice + INGREDIENT_PRICE[action.ingredient],
+                    activeIngredients: activeIngs,
+                    totalPrice: state.totalPrice + (state.ingredients[action.ingredient].price * 100),
                     building: true
                 }
             }
         case REMOVE_INGREDIENT:
             {
-                const updatedIngredients = {
-                    ...state.ingredients,
-                    [action.ingredient]: state.ingredients[action.ingredient] - 1
-                }
+                const updatedIngredients = [...state.activeIngredients];
+                const idx = state.activeIngredients.findIndex((type) => type === action.ingredient);
+                updatedIngredients.splice(idx, 1);
 
                 return {
                     ...state,
-                    ingredients: updatedIngredients,
-                    totalPrice: state.totalPrice - INGREDIENT_PRICE[action.ingredient],
+                    activeIngredients: updatedIngredients,
+                    totalPrice: state.totalPrice - (state.ingredients[action.ingredient].price * 100),
                     building: true
                 }
             }
@@ -50,6 +40,7 @@ const burgerBuilder = (state = initialState, action) => {
                 return {
                     ...state,
                     ingredients: action.ingredients,
+                    activeIngredients: [],
                     totalPrice: 400,
                     error: false,
                     building: false

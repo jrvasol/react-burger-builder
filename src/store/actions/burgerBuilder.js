@@ -13,7 +13,7 @@ export const setIngredients = (ingredients) => ({
 export const getIngredients = () => {
     return (dispatch) => {
         return axios
-                .get('/ingredients.json')
+                .get('/ingredients2.json')
                 .then((response) => {
                     dispatch(setIngredients(response.data))
                 })

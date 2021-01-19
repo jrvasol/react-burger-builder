@@ -82,12 +82,13 @@ class BurgerBuilder extends Component {
     render() {
         let burger = (
             <Aux>
-                <Burger ingredients={this.props.ingredients}/>
+                <Burger ingredients={this.props.ingredients} activeIngredients={this.props.activeIngredients}/>
                 <BuildControls
                     addIngredient={this.handleAddIngredient}
                     removeIngredient={this.handleRemoveIngredient}
                     totalPrice={this.props.totalPrice}
                     ingredients={this.props.ingredients}
+                    activeIngredients={this.props.activeIngredients}
                     purchasable={this.updatePurchaseState(this.props.ingredients)}
                     isAuth={this.props.isAuthenticated}
                     setOpenModal={this.handleOpenModal}/>
@@ -123,7 +124,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = ({burgerBuilder, auth}) => {
-    return {ingredients: burgerBuilder.ingredients, totalPrice: burgerBuilder.totalPrice, error: burgerBuilder.error, isAuthenticated: auth.token !== null}
+    return {ingredients: burgerBuilder.ingredients, activeIngredients: burgerBuilder.activeIngredients, totalPrice: burgerBuilder.totalPrice, error: burgerBuilder.error, isAuthenticated: auth.token !== null}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));

@@ -13,29 +13,33 @@ import Pickles from '../../../assets/images/ingredients/pickles.svg';
 import Egg from '../../../assets/images/ingredients/egg.svg';
 
 const BurgerIngredient = (props) => {
+    const setImg = (src, alt = "", index) => {
+        return <img className={styles['ingredients']} src={src} alt={alt} style={{zIndex: index}}/>;
+    };
+
     let ingredient = null;
 
     switch (props.type) { 
         case('bread-bottom'):
-            ingredient = <img src={BreadBottom} />;
+            ingredient = setImg(BreadBottom, props.type, props.zIndex);
             break;
         case('bread-top'):
-            ingredient = <img src={BreadTop} />;
+            ingredient = setImg(BreadTop, props.type, props.zIndex);
             break;
         case('meat'):
-            ingredient = <img className={styles['ingredients']} src={Meat} />;
+            ingredient = setImg(Meat, props.type, props.zIndex);
             break;
         case('cheese'):
-            ingredient = <img className={styles['ingredients']} src={Cheese} />;
+            ingredient = setImg(Cheese, props.type, props.zIndex);
             break;
         case('salad'):
-            ingredient = <img className={styles['ingredients']} src={Salad} />;
+            ingredient = setImg(Salad, props.type, props.zIndex);
             break;
         case('pickles'):
-            ingredient = <img className={styles['ingredients']} src={Pickles} />;
+            ingredient = setImg(Pickles, props.type, props.zIndex);
             break;
         case('egg'):
-            ingredient = <img className={styles['ingredients']} src={Egg} />;
+            ingredient = setImg(Egg, props.type, props.zIndex);
             break;
         default:
             ingredient = null;

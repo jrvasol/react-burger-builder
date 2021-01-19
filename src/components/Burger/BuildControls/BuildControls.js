@@ -2,40 +2,27 @@ import React from 'react';
 import styles from './BuildControls.module.css'
 import BuildControl from './BuildControl/BuildControl';
 
-const controls = [
-    {
-        label: 'Bacon',
-        type: 'bacon'
-    }, {
-        label: 'Salad',
-        type: 'salad'
-    }, {
-        label: 'Cheese',
-        type: 'cheese'
-    }, {
-        label: 'Meat',
-        type: 'meat'
-    }
-]
-
 const BuildControls = (props) => {
-    const disabledInfo = {
-        ...props.ingredients
+    const ingredients = props.ingredients;
+    const ingredientsControl = Object.keys(props.ingredients);
+
+    const checkDisabledInfo = (type) => {
+        return !props.activeIngredients.find(val => val === type);
     };
 
-    for (let key in disabledInfo) {
-        disabledInfo[key] = disabledInfo[key] <= 0;
-    };
+    const controls = ingredientsControl.map(type => (
+        <BuildControl
+                key={type}
+                label={ingredients[type].label}
+                disabledInfo={checkDisabledInfo(type)}
+                addIngredient={() => props.addIngredient(type)}
+                removeIngredient={() => props.removeIngredient(type)}/>
+    )); 
 
     return (
         <div className={styles['build-controls']}>
             <h3>Current Price: ${(props.totalPrice / 100).toFixed(2)}</h3>
-            {controls.map((val) => (<BuildControl
-                key={val.type}
-                label={val.label}
-                disabledInfo={disabledInfo[val.type]}
-                addIngredient={() => props.addIngredient(val.type)}
-                removeIngredient={() => props.removeIngredient(val.type)}/>))}
+            {controls}
             <button
                 className={styles.OrderButton}
                 disabled={!props.purchasable} 

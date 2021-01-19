@@ -4,25 +4,18 @@ import styles from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const Burger = (props) => {
-    let ingredients = Object
-        .keys(props.ingredients)
-        .map((type) => {
-            return [...Array(props.ingredients[type])].map((val, index) => {
-                return <BurgerIngredient key={type + index} type={type}/>
-            })
-        })
-        .reduce((arr, el) => {
-            return arr.concat(el)
-        }, []);
-
+    const ingLength = props.activeIngredients.length + 1;
+    let ingredients = props.activeIngredients.map((type, index) =>  <BurgerIngredient key={type + index} type={type} zIndex={ingLength - index}/>);
+    
     if(ingredients.length === 0) {
         ingredients = <h3>Please start adding ingredients!</h3>;
-    }  
+    }
 
     return (
         <div className={styles['burger-container']}>
-            <BurgerIngredient type="bread-top"/> {ingredients}
-            <BurgerIngredient type="bread-bottom"/>
+            <BurgerIngredient type="bread-top" zIndex={ingLength + 1}/> 
+            {ingredients}
+            <BurgerIngredient type="bread-bottom" zIndex="1"/>
         </div>
     )
 }
