@@ -10,11 +10,12 @@ import Meat from '../../../assets/images/ingredients/meat.svg';
 import Cheese from '../../../assets/images/ingredients/cheese.svg';
 import Salad from '../../../assets/images/ingredients/salad.svg';
 import Pickles from '../../../assets/images/ingredients/pickles.svg';
-import Egg from '../../../assets/images/ingredients/egg.svg';
+import Onion from '../../../assets/images/ingredients/onion.svg';
+import Tomato from '../../../assets/images/ingredients/tomato.svg';
 
 const BurgerIngredient = (props) => {
     const setImg = (src, alt = "", index) => {
-        return <img className={`${styles['ingredients']} ${props.classes}`} src={src} alt={alt} style={{zIndex: index || 1}}/>;
+        return <img className={`${styles['ingredients']} ${props.classes} ${props.type}`} src={src} alt={alt} style={{zIndex: index || 1}}/>;
     };
 
     let ingredient = null;
@@ -38,8 +39,11 @@ const BurgerIngredient = (props) => {
         case('pickles'):
             ingredient = setImg(Pickles, props.type, props.zIndex);
             break;
-        case('egg'):
-            ingredient = setImg(Egg, props.type, props.zIndex);
+        case('onion'):
+            ingredient = setImg(Onion, props.type, props.zIndex);
+            break;
+        case('tomato'):
+            ingredient = setImg(Tomato, props.type, props.zIndex);
             break;
         default:
             ingredient = null;
