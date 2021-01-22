@@ -1,0 +1,13 @@
+.slick-active .build-control-info {
+    visibility: visible;
+    transition: all .25s ease-in-out;
+    opacity: 1;
+}
+
+.build-control-info {
+    visibility: hidden;
+    opacity: 0;
+    transition: all .25s ease-in-out;
+    width: 100%;
+    padding: 0 8px;
+}

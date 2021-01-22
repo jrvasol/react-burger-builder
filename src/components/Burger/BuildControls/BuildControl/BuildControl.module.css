@@ -1,42 +1,62 @@
 .build-control {
+    position: relative;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    margin: 5px 0;
+    margin: 0;
+    padding: 35px;
+    transition: all .35s ease-in-out;
+    width: 180px;
+    height: 266px;
+    background-image: url('../../../../assets/images/ingredients/ingredient-container-2.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.build-control-shadow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background: green;
+    z-index: -1;
+    box-shadow: 0 6px 40px 15px rgba(95,75,139,0.25)
 }
 
 .build-control button {
     display: block;
     font: inherit;
-    padding: 5px;
+    color: #5F4B8B;
+    padding: 5px 10px;
     margin: 0 5px;
-    width: 80px;
-    border: 1px solid #aa6817;
+    border: none;
     cursor: pointer;
     outline: none;
+    background-color: transparent;
 }
 
 
 .build-control button:disabled {
-    background-color: #AC9980;
-    border: 1px solid #7E7365;
     color: #ccc;
     cursor: default;
 }
 
 .build-control button:hover:disabled {
-    background-color: #AC9980;
     color: #ccc;
     cursor: not-allowed;
 }
 
 .label {
-    padding: 10px;
+    padding: 10px 0;
+    margin: 0;
     font-weight: bold;
-    width: 80px;
+    text-transform: uppercase;
 }
 
-.build-control .less {  
+/* .build-control .less {  
     background-color: #D39952;
     color: white;
 }
@@ -54,4 +74,41 @@
 .build-control .more:hover,.build-control .more:active {
     background-color: #99703F;
     color: white;
+} */
+
+.build-control .burger-ingredient {
+    margin-bottom: 0;
+    max-width: 90%;
+    height: 100px;
+    transform: rotate(15deg);
+}
+
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price-total {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ECE6FA;
+    padding: 2px 0;
+    border-radius: 8px;
+}
+
+.amount {
+    margin: 0;
+    background-color: white;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
 }

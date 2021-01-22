@@ -14,7 +14,7 @@ import Egg from '../../../assets/images/ingredients/egg.svg';
 
 const BurgerIngredient = (props) => {
     const setImg = (src, alt = "", index) => {
-        return <img className={styles['ingredients']} src={src} alt={alt} style={{zIndex: index}}/>;
+        return <img className={`${styles['ingredients']} ${props.classes}`} src={src} alt={alt} style={{zIndex: index || 1}}/>;
     };
 
     let ingredient = null;
