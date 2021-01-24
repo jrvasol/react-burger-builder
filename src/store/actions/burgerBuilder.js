@@ -15,7 +15,11 @@ export const getIngredients = () => {
         return axios
                 .get('/ingredients2.json')
                 .then((response) => {
-                    dispatch(setIngredients(response.data))
+                    const sortedArr = Object.fromEntries(Object.entries(response.data).sort((a, b) => {
+                        return a[1].sortNumber - b[1].sortNumber;
+                    }));
+
+                    dispatch(setIngredients(sortedArr));
                 })
                 .catch((error) => {
                     dispatch(setIngredientsFailed());

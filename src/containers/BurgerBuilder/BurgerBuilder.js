@@ -63,20 +63,7 @@ class BurgerBuilder extends Component {
     }
 
     updatePurchaseState = (ings) => {
-        const ingredients = {
-            ...ings
-        }
-
-        const sum = Object
-            .keys(ingredients)
-            .map((type) => {
-                return ings[type];
-            })
-            .reduce((accumulator, val) => {
-                return accumulator + val
-            }, 0);
-
-        return sum > 0;
+        return ings.length !== 0;
     }
 
     render() {
@@ -89,7 +76,7 @@ class BurgerBuilder extends Component {
                     totalPrice={this.props.totalPrice}
                     ingredients={this.props.ingredients}
                     activeIngredients={this.props.activeIngredients}
-                    purchasable={this.updatePurchaseState(this.props.ingredients)}
+                    purchasable={this.updatePurchaseState(this.props.activeIngredients)}
                     isAuth={this.props.isAuthenticated}
                     setOpenModal={this.handleOpenModal}/>
             </Aux>

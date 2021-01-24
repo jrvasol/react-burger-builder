@@ -1,4 +1,30 @@
 .ingredients {
-    margin-bottom: -20%;
     position: relative;
-} 
+}
+
+.meat {
+    margin-bottom: -15%;
+}
+
+.onion {
+    width: 80%;
+    margin-bottom: -20%;
+}
+
+.pickles {
+    width: 80%;
+    margin-bottom: -15%;
+}
+
+.tomato {
+    width: 60%;
+    margin-bottom: -20%;
+}
+
+.bun-top {
+    margin-bottom: -10%;
+}
+
+.salad, .cheese{
+    margin-bottom: -25%;
+}
