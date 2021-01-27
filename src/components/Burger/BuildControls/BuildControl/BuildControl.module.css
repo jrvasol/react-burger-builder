@@ -29,7 +29,8 @@
 .build-control button {
     display: block;
     font: inherit;
-    color: #5F4B8B;
+    color: #57271B;
+    font-weight: 700;
     padding: 5px 10px;
     margin: 0 5px;
     border: none;
@@ -40,7 +41,7 @@
 
 
 .build-control button:disabled {
-    color: #ccc;
+    color: #888888;
     cursor: default;
 }
 
@@ -79,7 +80,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #ECE6FA;
+    background-color: #ffefdb;
     padding: 2px 0;
     border-radius: 8px;
 }
@@ -91,4 +92,5 @@
     font-size: 14px;
     font-weight: 700;
     border-radius: 8px;
+    color: #57271B;
 }

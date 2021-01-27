@@ -8,7 +8,7 @@ const Burger = (props) => {
     let ingredients = props.activeIngredients.map((type, index) =>  <BurgerIngredient key={type + index} type={type} zIndex={ingLength - index}/>);
     
     if(ingredients.length === 0) {
-        ingredients = <h3>Please start adding ingredients!</h3>;
+        ingredients = <h3 class={styles['placeholder']}>Please start adding ingredients!</h3>;
     }
 
     return (

@@ -3,21 +3,38 @@
     box-sizing: border-box;
     display: block;
     width: 100%;
+    text-align: center;
 }
 
 .nav-item a {
-    color: #8f5c2c;
+    color: #888888;
     text-decoration: none;
     width: 100%;
     box-sizing: border-box;
     display: block;
+    position: relative;
+    z-index: 2;
+    padding: 8px;
+    transition: all .2s ease-in-out;
 }
-
 
 .nav-item a:hover, 
 .nav-item a:active,
 .nav-item a.active {
-    color: #40a4c8;
+    color: #57271B;
+}
+
+.nav-item a.active:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-image: url('../../../../assets/images/ketchup.svg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
 }
 
 @media (min-width: 500px) {
