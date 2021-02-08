@@ -12,7 +12,10 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 
 export const Signup = (props) => {
     const {useState, useRef} = React;
-    const {register, handleSubmit, errors, watch} = useForm({mode: "onChange"});
+    const {register, handleSubmit, errors, watch, formState} = useForm({mode: "onChange"});
+    const {isDirty, isValid} = formState;
+
+    console.log(formState);
 
     const password = useRef({});
     password.current = watch("password", "");
@@ -32,8 +35,7 @@ export const Signup = (props) => {
                     value: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
                     message: "Invalid email address"
                 }
-            },
-            value: ''
+            }
         },
         password: {
             label: 'Password',
@@ -48,8 +50,7 @@ export const Signup = (props) => {
                     value: 6,
                     message: "Password should be atleast 6 characters"
                 }
-            },
-            value: ''
+            }
         },
         repeatPassword: {
             label: 'Repeat Password',
@@ -102,7 +103,7 @@ export const Signup = (props) => {
                 <div className={styles['form-btn-container']}>
                     {props.loading
                         ? <Spinner/>
-                        : <Button classes="block">Sign up</Button>}
+                        : <Button classes="block" disabled={!isValid} >Sign up</Button>}
                 </div>
             </form>
 

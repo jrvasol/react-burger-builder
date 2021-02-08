@@ -24,8 +24,10 @@
 }
 
 .Button:disabled {
+    background-color: #ffe8cc;
     cursor: not-allowed;
-    color: #ccc;
+    border: none;
+    color: #888888;
 }
 
 .Success {
