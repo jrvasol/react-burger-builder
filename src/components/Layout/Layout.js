@@ -19,6 +19,8 @@ const Layout = (props) => {
         setSideDrawerOpen(false);
     }
 
+    Modal.setAppElement('body');
+
     return (
         <Aux>
             <div>

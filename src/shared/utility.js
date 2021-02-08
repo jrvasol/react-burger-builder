@@ -24,4 +24,13 @@ export const checkValidity = (value, rules = {}) => {
     }
 
     return isValid;
+};
+
+export const getValidation = (validation) => {
+    switch(validation) {
+        case 'email':
+            return /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        default:
+            return "";
+    }
 }

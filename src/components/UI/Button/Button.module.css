@@ -1,18 +1,26 @@
 .Button {
-    background-color: transparent;
-    border: none;
-    color: white;
+    background-color: #DB8B2B;
     outline: none;
     cursor: pointer;
-    font: inherit;
-    padding: 10px;
-    margin: 10px;
-    font-weight: bold;
+    border: none;
+    color: #57271B;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 15px 30px;
+    margin-bottom: 10px;
+    border-radius: 8px;
 }
 
-.Button:first-of-type {
-    margin-left: 0;
-    padding-left: 0;
+.Button.block {
+    width: 100%;
+    display: block;
+}
+
+.Button.plain {
+    background-color: transparent;
+    border: none;
 }
 
 .Button:disabled {

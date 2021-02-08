@@ -1,13 +1,16 @@
 import { AUTH_START, AUTH_SUCCESS, AUTH_FAIL, AUTH_LOGOUT, SET_AUTH_REDIRECT_PATH } from './actionTypes';
 import axios from 'axios';
 
-export const auth = (email, password, isSignup) => {
+export const auth = (email, password, isSignup = false) => {
     return dispatch => {
         dispatch(authStart());
 
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAM2M9kplv8fAM_ha4ovg6nEi1sggBmql4';
-        if(!isSignup) {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAM2M9kplv8fAM_ha4ovg6nEi1sggBmql4'
+        console.log(email, password);
+
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAM2M9kplv8fAM_ha4ovg6nEi1sggBmql4';
+
+        if(isSignup) {
+            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAM2M9kplv8fAM_ha4ovg6nEi1sggBmql4';
         }
 
         const authData = {

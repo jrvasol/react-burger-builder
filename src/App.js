@@ -11,16 +11,18 @@ const BurgerBuilder = lazy(() => import('./containers/BurgerBuilder/BurgerBuilde
 const Checkout = lazy(() => import('./containers/Checkout/Checkout'));
 const MyOrders = lazy(() => import('./containers/MyOrders/MyOrders'));
 const Auth = lazy(() => import('./containers/Auth/Auth'));
+const Signup = lazy(() => import('./containers/Auth/Signup/Signup'));
 
 const App = ({onAuthCheckState, isAuthenticated}) => {
     useEffect(() => { 
-        onAuthCheckState()
+        onAuthCheckState();
     }, [onAuthCheckState]);
 
     let routes = (
         <Switch>
             <Route path="/" exact component={BurgerBuilder}/>
-            <Route path="/login" component={Auth}/>
+            <Route path="/signin" component={Auth}/>
+            <Route path="/signup" component={Signup}/>
             <Redirect to="/"/>
         </Switch>
     )
@@ -31,7 +33,8 @@ const App = ({onAuthCheckState, isAuthenticated}) => {
             <Route path="/" exact component={BurgerBuilder}/>
             <Route path="/checkout" component={Checkout}/>
             <Route path="/my-orders" component={MyOrders}/>
-            <Route path="/login" component={Auth}/> 
+            <Route path="/signin" component={Auth}/> 
+            <Route path="/signup" component={Signup}/> 
             <Route path="/logout" component={Logout}/>
             <Redirect to="/"/>
         </Switch>)

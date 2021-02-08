@@ -1,7 +1,7 @@
 .Input {
     width: 100%;
-    padding: 10px;
     box-sizing: border-box;
+    margin-bottom: 30px;
 }
 
 .Label {
@@ -12,24 +12,36 @@
 
 .InputElement {
     outline: none;
-    border: solid 1px #ccc;
-    background-color: white;
+    border: solid 2px transparent;
+    background-color: #f6f5f4;
     font: inherit;
-    padding:  6px 10px;
+    padding: 10px 15px;
     width: 100%;
     box-sizing: border-box;
+    border-radius: 8px;
+    transition: background-color .2s ease, border-color .3s ease-out, box-shadow .4s ease-out;
 }
 
-.InputElement:focus {
+.InputElement:focus, 
+.InputElement:hover {
     outline: none;
-    background-color: #ccc;
+    background-color: #fff;
+    border-color: #fed445;
+    box-shadow: 0 0 0 4px rgb(255 232 204 / 80%);
 }
 
 .invalid {
-    border: solid 1px salmon;
-    background-color: rgb(255, 174, 167);
+    background-color: lightcoral;
 }
 
-.invalid:focus {
-    background-color: rgb(255, 174, 167);
+.invalid:focus, .invalid:hover {
+    background-color: #fff;
+    border-color: lightsalmon;
+    box-shadow: 0 0 0 4px rgb(255 174 167 / 50%);
+}
+
+.error-message {
+    color: lightcoral;
+    font-weight: 700;
+    margin: 10px 0 0;
 }

@@ -1,34 +1,30 @@
 import React from 'react';
 import styles from './Input.module.css';
 
-const Input = (props) => {
+const Input = ({name, register, label, elementType, elementConfig, errors}) => {
     let inputElement = null;
     const inputClasses = [styles['InputElement']];
 
-
-    if(props.isInvalid && props.shouldValidate && props.touched) {
+    if(errors[name]) {
         inputClasses.push(styles['invalid']);
     }
 
-    switch (props.elementType) {
+    switch (elementType) {
         case('input'):
             inputElement = <input
                 className={inputClasses.join(' ')}
-                value={props.value}
-                name={props.name}
-                {...props.elementConfig}
-                onChange={props.handleValueChange}/>;
+                ref={register}
+                name={name}
+                {...elementConfig}/>;
             break;
         case('textarea'):
             inputElement = <textarea
                 className={inputClasses.join(' ')}
-                value={props.value}
-                {...props.elementConfig}/>;
+                {...elementConfig}/>;
             break;
         case('select'):
-            inputElement = <select className={inputClasses.join(' ')} onChange={props.handleValueChange} defaultValue="cheapest">
-                {props
-                    .elementConfig 
+            inputElement = <select className={inputClasses.join(' ')} defaultValue="cheapest">
+                {elementConfig 
                     .options
                     .map((option) => (
                         <option value={option.value} key={option.value}>{option.displayName}</option>
@@ -38,17 +34,20 @@ const Input = (props) => {
             break;
         default:
             inputElement = <input
+                name={name}
+                ref={register}
                 className={inputClasses.join(' ')}
-                value={props.value}
-                {...props.elementConfig}
-                onChange={props.handleValueChange}/>;
+                {...elementConfig}/>;
 
     }
 
     return (
         <div className={styles['Input']}>
-            <label className={styles['Label']}>{props.label}</label>
+            { label ? <label className={styles['Label']}>{label}</label> : null}
             {inputElement}
+            <div className={styles['error-container']}>
+                {errors[name] && <p className={styles['error-message']}>{errors[name].message}</p>}
+            </div>
         </div>
     )
 }

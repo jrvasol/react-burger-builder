@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
+import styles from './Auth.module.css';
+
 import { auth, setAuthRedirectPath } from '../../store/actions/auth';
 
 import Input from '../../components/UI/Input/Input';
@@ -42,8 +44,7 @@ class Auth extends Component {
                 valid: false,
                 touched: false
             }
-        },
-        isSignup: true
+        }
     }
 
     componentDidMount() {
@@ -73,14 +74,14 @@ class Auth extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
     }
 
-    switchAuthModeHandler = () => {
-        this.setState(prevState => {
-            return {isSignup: !prevState.isSignup}
-        })
-    }
+    // switchAuthModeHandler = () => {
+    //     this.setState(prevState => {
+    //         return {isSignup: !prevState.isSignup}
+    //     })
+    // }
 
     render() {
         const formElement = [];
@@ -92,6 +93,7 @@ class Auth extends Component {
         const form = formElement.map(({id, config}) => (<Input
             name={id}
             key={id}
+            label={config.label}
             elementConfig={config.elementConfig}
             isInvalid={!config.valid}
             shouldValidate={config.validation}
@@ -110,18 +112,18 @@ class Auth extends Component {
         }
 
         return (
-            <div>
+            <div className={styles['login-container']}>
                 { this.props.isAuthenticated ? <Redirect to={this.props.authRedirectPath} /> : null }
-
+                <h1 className={styles['header']}>Sign in</h1>
                 <form onSubmit={this.submitHandler}>
                     {form}
-                    {errorMessage}
-                    {
-                        this.props.loading ? <Spinner/> : <Button btnType="Success">Submit</Button>
-                    }
+                    <div className={styles['error-message']}>{errorMessage}</div>
+                    <div className={styles['form-btn-container']}>
+                        { this.props.loading ? <Spinner/> : <Button classes="block">Sign in</Button> }
+                    </div>
                 </form>
 
-                <Button btnType="Danger" clicked={this.switchAuthModeHandler}>Switch to {this.state.isSignup ? 'Signin' : 'Signup'}</Button>
+                <Button btnType="plain" classes="block" clicked={this.switchAuthModeHandler}>Don't have an account? Switch to sign up</Button>
             </div>
         );
     }
@@ -129,7 +131,7 @@ class Auth extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAuth: (email, password, isSignup) => dispatch(auth(email, password, isSignup)),
+        onAuth: (email, password) => dispatch(auth(email, password)),
         onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath('/'))
     }
 };
