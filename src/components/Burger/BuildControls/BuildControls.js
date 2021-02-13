@@ -56,7 +56,7 @@ const BuildControls = (props) => {
             <button
                 className={styles.OrderButton}
                 disabled={!props.purchasable} 
-                onClick={props.setOpenModal}>{ props.isAuth ? 'Order Now' : 'Signup to order'}</button>
+                onClick={props.setOpenModal}>{ props.isAuth ? 'Order Now' : 'Sign in to order'}</button>
         </div>
     )
 }

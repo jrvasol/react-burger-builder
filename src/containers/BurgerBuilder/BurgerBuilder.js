@@ -46,8 +46,8 @@ class BurgerBuilder extends Component {
             this.setState({showModal: true})
         } else {
             this.props.onSetAuthRedirectPath('/checkout');
-            this.props.history.push('/login')
-        }        
+            this.props.history.push('/signin')
+        }  
     }
 
     handleCloseModal = () => {
@@ -90,7 +90,9 @@ class BurgerBuilder extends Component {
                         ? 'Something went wrong'
                         : <Spinner/>)}
 
-                <Modal isOpen={this.state.showModal} onRequestClose={this.handleCloseModal}>
+                <Modal isOpen={this.state.showModal} 
+                        onRequestClose={this.handleCloseModal} 
+                    className="modal-default">
                     <OrderSummary
                         continuePurchase={this.handlePurchase}
                         setCloseModal={this.handleCloseModal}/>

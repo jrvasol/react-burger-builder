@@ -2,6 +2,8 @@ import React, {useEffect, lazy, Suspense} from 'react';
 import {Switch, Route, withRouter, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+import './assets/css/Modal.css';
+
 import {authCheckState} from './store/actions/auth';
 
 import Layout from './components/Layout/Layout';

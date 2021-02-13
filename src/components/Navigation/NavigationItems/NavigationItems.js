@@ -9,7 +9,7 @@ const NavigationItems = (props) => {
         <ul className={styles['nav-item-container']}>
             <NavigationItem link="/" exact={true}>Burger Builder</NavigationItem>
             {props.isAuthenticated ? <NavigationItem link="/my-orders">My Orders</NavigationItem> : null}
-            {props.isAuthenticated ? <NavigationItem link="/logout">Logout</NavigationItem> : <NavigationItem link="/signin">Login</NavigationItem>}
+            {props.isAuthenticated ? <NavigationItem link="/logout">Sign out</NavigationItem> : <NavigationItem link="/signin">Sign in</NavigationItem>}
             {!props.isAuthenticated ? <NavigationItem link="/signup">Sign up</NavigationItem> : null}
         </ul>
     )

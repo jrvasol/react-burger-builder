@@ -1,0 +1,20 @@
+.ReactModal__Body--open {
+    overflow: hidden;
+}
+
+.ReactModal__Overlay {
+    z-index: 100;
+}
+
+.modal-default {
+    padding: 0;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background-color: #ffffff;
+    border: solid 1px #ccc;
+}
+
+.modal-default:focus {
+    outline: none;
+}

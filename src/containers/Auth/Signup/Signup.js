@@ -13,9 +13,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 export const Signup = (props) => {
     const {useState, useRef} = React;
     const {register, handleSubmit, errors, watch, formState} = useForm({mode: "onChange"});
-    const {isDirty, isValid} = formState;
-
-    console.log(formState);
+    const {isValid} = formState;
 
     const password = useRef({});
     password.current = watch("password", "");

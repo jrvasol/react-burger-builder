@@ -40,7 +40,7 @@ const burgerBuilder = (state = initialState, action) => {
                 return {
                     ...state,
                     ingredients: action.ingredients,
-                    activeIngredients: [],
+                    activeIngredients: ['meat', 'cheese', 'pickles', 'tomato', 'salad', 'onion'],
                     totalPrice: 400,
                     error: false,
                     building: false
