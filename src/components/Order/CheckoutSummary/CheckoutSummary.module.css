@@ -1,0 +1,16 @@
+.header {
+    padding: 0 20px 20px;
+    margin-bottom: 20px;
+}
+
+.header-title {
+    margin: 0;
+    font-size: 36px;
+}
+
+.header-sub {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #666;
+}

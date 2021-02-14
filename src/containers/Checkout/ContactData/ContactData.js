@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
+import {useForm} from 'react-hook-form';
 
 import {purchaseBurger} from '../../../store/actions/order';
 
@@ -8,11 +9,14 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../../axios-orders';
-import {checkValidity} from '../../../shared/utility';
+
+import styles from './ContactData.module.css';
 
 const ContactData = (props) => {
-    const [orderForm,
-        setOrderForm] = useState({
+    const {useState} = React;
+    const {register, handleSubmit, errors} = useForm({mode: "onChange"});
+
+    const [controls] = useState({
         name: {
             label: 'Name',
             elementType: 'input',
@@ -20,12 +24,9 @@ const ContactData = (props) => {
                 type: 'text',
                 placeholder: 'Your Name'
             },
-            value: '',
-            validation: {
-                required: true
-            },
-            valid: false,
-            touched: false
+            rules: {
+                required: "This is a required field"
+            }
         },
         street: {
             label: 'Street',
@@ -34,12 +35,9 @@ const ContactData = (props) => {
                 type: 'text',
                 placeholder: 'Your Street Name'
             },
-            value: '',
-            validation: {
-                required: true
-            },
-            valid: false,
-            touched: false
+            rules: {
+                required: "This is a required field"
+            }
         },
         zipCode: {
             label: 'Zip Code',
@@ -48,29 +46,32 @@ const ContactData = (props) => {
                 type: 'text',
                 placeholder: 'Your zip code'
             },
-            value: '',
-            validation: {
-                required: true,
-                minLength: 5,
-                maxLength: 5
-            },
-            valid: false,
-            touched: false
+            rules: {
+                required: "This is a required field",
+                minLength: {
+                    value: 5,
+                    message: "Please input correct zip code"
+                },
+                maxLength: {
+                    value: 5,
+                    message: "Please input correct zip code"
+                }
+            }
         },
         email: {
-            label: 'E-Mail Address',
+            label: 'E-mail Address',
             elementType: 'input',
             elementConfig: {
                 type: 'email',
                 placeholder: 'Your email address'
             },
-            value: '',
-            validation: {
-                required: true,
-                isEmail: true
-            },
-            valid: false,
-            touched: false
+            rules: {
+                required: "This is a required field",
+                pattern: {
+                    value: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+                    message: "Invalid email address"
+                }
+            }
         },
         deliveryMethod: {
             label: 'Delivery Method',
@@ -86,80 +87,54 @@ const ContactData = (props) => {
                     }
                 ]
             },
-            value: 'cheapest',
-            valid: true
+            value: 'cheapest'
         }
     });
 
-    const [isFormValid,
-        setFormValid] = useState(false);
-
-    const handleOrder = (event) => {
-        event.preventDefault();
-        const formData = {};
-
-        for (let key in orderForm) {
-            formData[key] = orderForm[key].value;
+    const onSubmit = (data) => {
+        const formData = {
+            name: data.name,
+            street: data.street,
+            zipCode: data.zipCode,
+            email: data.email,
+            deliveryMethod: data.deliveryMethod
         }
 
-        const order = {
-            ingredients: props.ingredients,
-            price: props.totalPrice,
-            customerData: formData,
-            userId: props.userId
-        }
+        console.log(formData);
 
-        props.purchaseBurger(order, props.token);
-    }
+        // const order = {
+        //     ingredients: props.ingredients,
+        //     price: props.totalPrice,
+        //     customerData: formData,
+        //     userId: props.userId
+        // }
 
-    const handleValueChange = (event, id) => {
-        const val = event.target.value;
-
-        const updatedOrderForm = {
-            ...orderForm,
-            [id]: {
-                ...orderForm[id],
-                value: val,
-                valid: checkValidity(val, orderForm[id].validation),
-                touched: true
-            }
-        };
-
-        let formValid = true;
-        for (let key in updatedOrderForm) {
-            formValid = updatedOrderForm[key].valid && formValid;
-        }
-
-        setFormValid(formValid);
-        setOrderForm(updatedOrderForm);
+        // props.purchaseBurger(order, props.token);
     }
 
     const formElement = [];
     for (const [key,
-        value]of Object.entries(orderForm)) {
+        value]of Object.entries(controls)) {
         formElement.push({id: key, config: value});
-    }
+    } 
+
+    const form = formElement.map(({id, config}) => (<Input
+        key={id}
+        name={id}
+        errors={errors}
+        register={register({ ...config.rules })}
+        label={config.label}
+        elementConfig={config.elementConfig}
+        elementType={config.elementType}
+        value={config.value}/>));
 
     return (
-        <div>
-            <h4>Enter your Contact Data</h4>
-            <form onSubmit={handleOrder}>
-                {formElement.map(({id, config}) => (<Input
-                    name={id}
-                    key={id}
-                    elementConfig={config.elementConfig}
-                    isInvalid={!config.valid}
-                    shouldValidate={config.validation}
-                    touched={config.touched}
-                    elementType={config.elementType}
-                    handleValueChange={(event) => {
-                    handleValueChange(event, id)
-                }}
-                    value={config.value}/>))
-}
+        <div className={styles['contact-container']}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                {form}
                 {props.isLoading
                     ? <Spinner/>
-                    : <Button btnType="Success" clicked={handleOrder} disabled={!isFormValid}>Order</Button>}
+                    : <Button classes="block">Order</Button>}
             </form>
         </div>
     )

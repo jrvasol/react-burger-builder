@@ -23,7 +23,7 @@ const Input = ({name, register, label, elementType, elementConfig, errors}) => {
                 {...elementConfig}/>;
             break;
         case('select'):
-            inputElement = <select className={inputClasses.join(' ')} defaultValue="cheapest">
+            inputElement = <select className={inputClasses.join(' ')} defaultValue="cheapest" ref={register} name={name}>
                 {elementConfig 
                     .options
                     .map((option) => (

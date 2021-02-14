@@ -1,16 +1,17 @@
 import React from 'react';
 
 import Burger from '../../Burger/Burger';
-import Button from '../../UI/Button/Button';
+
+import styles from './CheckoutSummary.module.css';
 
 const CheckoutSummary = (props) => {
     return (
         <div>
-            <h1>I hope it tastes good!</h1>
-            <Burger ingredients={props.ingredients} />
-
-            <Button btnType="Danger" clicked={props.handleCancel}>Cancel</Button>
-            <Button btnType="Success" clicked={props.handleContinue}>Continue</Button>
+            <div className={styles['header']}>
+                <h1 className={styles['header-title']}>Checkout</h1>
+                <p className={styles['header-sub']}>I hope it tastes good!</p>
+            </div>
+            <Burger ingredients={props.ingredients} activeIngredients={props.activeIngredients}/>
         </div>
     )
 }
