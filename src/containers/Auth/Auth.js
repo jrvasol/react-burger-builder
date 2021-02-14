@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Redirect, NavLink} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 
 import styles from './Auth.module.css';
@@ -85,8 +85,10 @@ export const Auth = (props) => {
                     { props.loading ? <Spinner/> : <Button classes="block">Sign in</Button> }
                 </div>
             </form>
-
-            <Button btnType="plain" classes="block">Don't have an account? Switch to sign up</Button>
+            
+            <div className={styles['switch-container']}>
+                <p className={styles['switch-text']}>Don't have an account?</p> <NavLink to="signup">Sign up</NavLink>
+            </div>
         </div>
     )
 }

@@ -7,10 +7,10 @@ import styles from './NavigationItems.module.css';
 const NavigationItems = (props) => {
     return (
         <ul className={styles['nav-item-container']}>
-            <NavigationItem link="/" exact={true}>Burger Builder</NavigationItem>
-            {props.isAuthenticated ? <NavigationItem link="/my-orders">My Orders</NavigationItem> : null}
-            {props.isAuthenticated ? <NavigationItem link="/logout">Sign out</NavigationItem> : <NavigationItem link="/signin">Sign in</NavigationItem>}
-            {!props.isAuthenticated ? <NavigationItem link="/signup">Sign up</NavigationItem> : null}
+            <NavigationItem closeSideDrawer={props.closeSideDrawer} link="/" exact={true}>Burger Builder</NavigationItem>
+            {props.isAuthenticated ? <NavigationItem closeSideDrawer={props.closeSideDrawer} link="/my-orders">My Orders</NavigationItem> : null}
+            {props.isAuthenticated ? <NavigationItem link="/logout">Sign out</NavigationItem> : <NavigationItem closeSideDrawer={props.closeSideDrawer} link="/signin">Sign in</NavigationItem>}
+            {!props.isAuthenticated ? <NavigationItem closeSideDrawer={props.closeSideDrawer} link="/signup">Sign up</NavigationItem> : null}
         </ul>
     )
 }

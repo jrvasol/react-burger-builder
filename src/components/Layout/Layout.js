@@ -37,7 +37,7 @@ const Layout = (props) => {
                 isOpen={sideDrawerIsOpen}
                 closeTimeoutMS={100}
                 onRequestClose={closeSideDrawer}>
-                <SideDrawer></SideDrawer>
+                <SideDrawer closeSideDrawer={closeSideDrawer}></SideDrawer>
             </Modal>
         </Aux>
     )

@@ -11,7 +11,7 @@ const SideDrawer = (props) => {
                 <Logo/>
             </div>
             <nav>
-                <NavigationItems></NavigationItems>
+                <NavigationItems closeSideDrawer={props.closeSideDrawer}></NavigationItems>
             </nav>
         </div>
     )

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Redirect, NavLink} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 
 import styles from '../Auth.module.css';
@@ -105,7 +105,9 @@ export const Signup = (props) => {
                 </div>
             </form>
 
-            <Button btnType="plain" classes="block">Already have an account? Switch to Sign in</Button>
+            <div className={styles['switch-container']}>
+                <p className={styles['switch-text']}>Don't have an account?</p> <NavLink to="signin">Sign up</NavLink>
+            </div>
         </div>
     );
 }
