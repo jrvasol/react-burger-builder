@@ -12,6 +12,24 @@
     margin-top: 15%;
 }
 
+.burger-open.meat,
+.burger-open.onion,
+.burger-open.pickles,
+.burger-open.salad, 
+.burger-open.cheese,  
+.burger-open.tomato {
+    margin-bottom: -35%;
+}
+
+.burger-open.bread-bottom {
+    margin-top: 15%;
+}
+
+.burger-open.bread-top {
+    margin-bottom: -20%;
+}
+
+/* 
 @media (min-width: 500px) and (min-height: 400px) {
     .burger-container {
         width: 350px;
@@ -31,4 +49,4 @@
         width: 700px;
         height: 600px;
     }
-}
+} */

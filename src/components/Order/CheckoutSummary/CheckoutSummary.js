@@ -11,7 +11,7 @@ const CheckoutSummary = (props) => {
                 <h1 className={styles['header-title']}>Checkout</h1>
                 <p className={styles['header-sub']}>I hope it tastes good!</p>
             </div>
-            <Burger ingredients={props.ingredients} activeIngredients={props.activeIngredients}/>
+            <Burger ingredients={props.ingredients} activeIngredients={props.activeIngredients} burgerMode="burger-open"/>
         </div>
     )
 }

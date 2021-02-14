@@ -100,16 +100,14 @@ const ContactData = (props) => {
             deliveryMethod: data.deliveryMethod
         }
 
-        console.log(formData);
+        const order = {
+            ingredients: props.activeIngredients,
+            price: props.totalPrice,
+            customerData: formData,
+            userId: props.userId
+        }
 
-        // const order = {
-        //     ingredients: props.ingredients,
-        //     price: props.totalPrice,
-        //     customerData: formData,
-        //     userId: props.userId
-        // }
-
-        // props.purchaseBurger(order, props.token);
+        props.purchaseBurger(order, props.token);
     }
 
     const formElement = [];
@@ -140,7 +138,7 @@ const ContactData = (props) => {
     )
 };
 
-const mapStateToProps = ({burgerBuilder, order, auth}) => ({token: auth.token, ingredients: burgerBuilder.ingredients, isLoading: order.loading, totalPrice: burgerBuilder.totalPrice, userId: auth.userId});
+const mapStateToProps = ({burgerBuilder, order, auth}) => ({token: auth.token, activeIngredients: burgerBuilder.activeIngredients, isLoading: order.loading, totalPrice: burgerBuilder.totalPrice, userId: auth.userId});
 
 const mapDispatchToProps = dispatch => {
     return {

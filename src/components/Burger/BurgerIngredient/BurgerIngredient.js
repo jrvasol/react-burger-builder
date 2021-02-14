@@ -15,17 +15,17 @@ import Tomato from '../../../assets/images/ingredients/tomato.svg';
 
 const BurgerIngredient = (props) => {
     const setImg = (src, type="", index) => {
-        return <img className={`${styles['ingredients']} ${props.classes} ${styles[type]}`} src={src} alt={type} style={{zIndex: index || 1}}/>;
+        const ingClasses = props.classes ? props.classes : '';
+        return <img className={`${styles['ingredients']} ${styles[type]} ${ingClasses}`} src={src} alt={type} style={{zIndex: index || 1}}/>;
     };
 
     let ingredient = null;
-
     switch (props.type) { 
         case('bread-bottom'):
             ingredient = setImg(BreadBottom, props.type, props.zIndex);
             break;
         case('bread-top'):
-            ingredient = setImg(BreadTop, 'bun-top', props.zIndex);
+            ingredient = setImg(BreadTop, props.type, props.zIndex);
             break;
         case('meat'):
             ingredient = setImg(Meat, props.type, props.zIndex);
