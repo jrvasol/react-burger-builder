@@ -4,16 +4,20 @@ import {Redirect, NavLink} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 
 import styles from '../Auth.module.css';
-import {auth, setAuthRedirectPath} from '../../../store/actions/auth';
+import {auth, setAuthRedirectPath, authFail} from '../../../store/actions/auth';
 
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 
 export const Signup = (props) => {
-    const {useState, useRef} = React;
+    const {useState, useRef, useEffect} = React;
     const {register, handleSubmit, errors, watch, formState} = useForm({mode: "onChange"});
     const {isValid} = formState;
+
+    useEffect(() => {
+        props.onAuthFail();
+    }, []);
 
     const password = useRef({});
     password.current = watch("password", "");
@@ -79,7 +83,9 @@ export const Signup = (props) => {
         key={id}
         name={id}
         errors={errors}
-        register={register({ ...config.rules })}
+        register={register({
+        ...config.rules
+    })}
         label={config.label}
         elementConfig={config.elementConfig}
         elementType={config.elementType}
@@ -89,6 +95,17 @@ export const Signup = (props) => {
         props.onAuth(data.email, data.password, true);
     }
 
+    let errorMessage = null;
+    if (props.error) {
+        errorMessage = (
+            <div className={styles['error-message']}>
+                <p>
+                    {props.error.message}
+                </p>
+            </div>
+        );
+    }
+
     return (
         <div className={styles['login-container']}>
             {props.isAuthenticated
@@ -96,17 +113,21 @@ export const Signup = (props) => {
                 : null}
 
             <h1 className={styles['header']}>Sign up</h1>
+
+            {errorMessage}
+
             <form onSubmit={handleSubmit(onSubmit)}>
                 {form}
                 <div className={styles['form-btn-container']}>
-                    {props.loading
-                        ? <Spinner/>
-                        : <Button classes="block" disabled={!isValid} >Sign up</Button>}
+                    <Button classes="block" disabled={!isValid}>{props.loading
+                            ? <Spinner/>
+                            : 'Sign up'}</Button>
                 </div>
             </form>
 
             <div className={styles['switch-container']}>
-                <p className={styles['switch-text']}>Don't have an account?</p> <NavLink to="signin">Sign up</NavLink>
+                <p className={styles['switch-text']}>Don't have an account?</p>
+                <NavLink to="signin">Sign in</NavLink>
             </div>
         </div>
     );
@@ -115,7 +136,8 @@ export const Signup = (props) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onAuth: (email, password, isSignup) => dispatch(auth(email, password, isSignup)),
-        onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath('/'))
+        onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath('/')),
+        onAuthFail: () => dispatch(authFail(null))
     }
 };
 

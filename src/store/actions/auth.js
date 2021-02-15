@@ -5,10 +5,7 @@ export const auth = (email, password, isSignup = false) => {
     return dispatch => {
         dispatch(authStart());
 
-        console.log(email, password);
-
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAM2M9kplv8fAM_ha4ovg6nEi1sggBmql4';
-
         if(isSignup) {
             url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAM2M9kplv8fAM_ha4ovg6nEi1sggBmql4';
         }

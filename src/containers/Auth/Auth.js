@@ -4,15 +4,19 @@ import {Redirect, NavLink} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 
 import styles from './Auth.module.css';
-import { auth, setAuthRedirectPath } from '../../store/actions/auth';
+import {auth, setAuthRedirectPath, authFail} from '../../store/actions/auth';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 export const Auth = (props) => {
-    const {useState} = React;
+    const {useState, useEffect} = React;
     const {register, handleSubmit, errors} = useForm({mode: "onChange"});
+
+    useEffect(() => {
+        props.onAuthFail();
+    }, []);
 
     const [controls] = useState({
         email: {
@@ -57,7 +61,9 @@ export const Auth = (props) => {
         key={id}
         name={id}
         errors={errors}
-        register={register({ ...config.rules })}
+        register={register({
+        ...config.rules
+    })}
         label={config.label}
         elementConfig={config.elementConfig}
         elementType={config.elementType}
@@ -68,26 +74,36 @@ export const Auth = (props) => {
     }
 
     let errorMessage = null;
-    if(props.error) {
-        errorMessage = (<p>
-            {props.error.message}
-        </p>);
+    if (props.error) {
+        errorMessage = (
+            <div className={styles['error-message']}>
+                <p>
+                    {props.error.message}
+                </p>
+            </div>
+        );
     }
 
     return (
         <div className={styles['login-container']}>
-            { props.isAuthenticated ? <Redirect to={props.authRedirectPath} /> : null }
+            {props.isAuthenticated
+                ? <Redirect to={props.authRedirectPath}/>
+                : null}
             <h1 className={styles['header']}>Sign in</h1>
+
+            {errorMessage}
             <form onSubmit={handleSubmit(onSubmit)}>
                 {form}
-                <div className={styles['error-message']}>{errorMessage}</div>
                 <div className={styles['form-btn-container']}>
-                    { props.loading ? <Spinner/> : <Button classes="block">Sign in</Button> }
+                    <Button classes="block">{props.loading
+                            ? <Spinner/>
+                            : 'Sign in'}</Button>
                 </div>
             </form>
-            
+
             <div className={styles['switch-container']}>
-                <p className={styles['switch-text']}>Don't have an account?</p> <NavLink to="signup">Sign up</NavLink>
+                <p className={styles['switch-text']}>Don't have an account?</p>
+                <NavLink to="signup">Sign up</NavLink>
             </div>
         </div>
     )
@@ -96,6 +112,7 @@ export const Auth = (props) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onAuth: (email, password) => dispatch(auth(email, password)),
+        onAuthFail: () => dispatch(authFail(null)),
         onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath('/'))
     }
 };

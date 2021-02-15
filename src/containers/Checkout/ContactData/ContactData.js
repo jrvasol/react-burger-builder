@@ -130,9 +130,7 @@ const ContactData = (props) => {
         <div className={styles['contact-container']}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {form}
-                {props.isLoading
-                    ? <Spinner/>
-                    : <Button classes="block">Order</Button>}
+                <Button classes="block">{props.isLoading ? <Spinner/> : 'Order'}</Button>
             </form>
         </div>
     )

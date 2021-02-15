@@ -13,6 +13,7 @@ const Checkout = (props) => {
         const purchaseRedirect = props.purchased ? <Redirect to="/"/> : null;
         summary = (
             <div> 
+                <ScrollToTop/>
                 {purchaseRedirect}
                 <CheckoutSummary
                     activeIngredients={props.activeIngredients}
@@ -22,12 +23,7 @@ const Checkout = (props) => {
         );
     }
 
-    return (
-        <>
-            <ScrollToTop/>
-            {summary}
-        </>
-    );
+    return summary;
 }
 
 const mapStateToProps = ({burgerBuilder, order}) => ({ingredients: burgerBuilder.ingredients, activeIngredients : burgerBuilder.activeIngredients, purchased: order.purchased});
