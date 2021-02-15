@@ -13,6 +13,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import ScrollToTop from '../../components/ScrollToTop/ScrollToTop';
 
 class BurgerBuilder extends Component {
     state = {
@@ -84,6 +85,8 @@ class BurgerBuilder extends Component {
 
         return (
             <Aux>
+                <ScrollToTop/>
+                
                 {this.props.ingredients
                     ? burger
                     : (this.props.error
