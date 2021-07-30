@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './BuildControls.module.css';
 
 import BuildControl from './BuildControl/BuildControl';
+import {getIngredientCount} from '../../../shared/utility';
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
@@ -12,17 +13,12 @@ const BuildControls = (props) => {
     const ingredientsControl = Object.keys(props.ingredients);
 
     const checkDisabledInfo = (type) => {
-        return !props.activeIngredients.find(val => val === type);
+        return !props.activeIngredients.find((val) => val.type === type);
     };
 
     const ingredientTotalPrice = (type) => {
-        return (ingredientCount(type) * ingredients[type].price).toFixed(2); 
-    }
-
-    const ingredientCount = (type) => {
-        const arrLength = props.activeIngredients.filter(ing => ing === type).length;
-        return arrLength;
-    }
+        return (getIngredientCount(props.activeIngredients, type) * ingredients[type].price).toFixed(2); 
+    };
  
     const sliderSettings = {
         dots: false,
@@ -35,16 +31,16 @@ const BuildControls = (props) => {
     };
 
     const controls = ingredientsControl.map(type => (
-        <BuildControl    
+        <BuildControl
             key={type}
             type={type}
             ingredientTotalPrice={ingredientTotalPrice(type)}
-            ingredientCount={ingredientCount(type)}
+            ingredientCount={getIngredientCount(props.activeIngredients, type)}
             label={ingredients[type].label}
             disabledInfo={checkDisabledInfo(type)}
             addIngredient={() => props.addIngredient(type)}
             removeIngredient={() => props.removeIngredient(type)}/>
-    )); 
+    ));
 
     return (
         <div className={styles['build-controls']}>
@@ -52,7 +48,7 @@ const BuildControls = (props) => {
                 {controls}
             </Slider>
 
-            <h3>Total: ${(props.totalPrice / 100).toFixed(2)}</h3>
+            <h3>Total: ₱{(props.totalPrice / 100).toFixed(2)}</h3>
             <button
                 className={styles.OrderButton}
                 disabled={!props.purchasable} 

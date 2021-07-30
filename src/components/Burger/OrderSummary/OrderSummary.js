@@ -9,9 +9,10 @@ import styles from './OrderSummary.module.css';
 
 const OrderSummary = (props) => {
     const ingredientCount = (type) => {
+
         const arrLength = props
             .activeIngredients
-            .filter(ing => ing === type)
+            .filter(ing => ing.type === type)
             .length;
         return arrLength;
     }
@@ -32,7 +33,7 @@ const OrderSummary = (props) => {
                             </div>
                         </div>
                         <div className={styles['price-container']}>
-                            <p className={styles['price']}>${(ingredientCount(type) * props.ingredients[type].price).toFixed(2)}</p>
+                            <p className={styles['price']}>₱{(ingredientCount(type) * props.ingredients[type].price).toFixed(2)}</p>
                         </div>
                     </li>
                 )
@@ -67,7 +68,7 @@ const OrderSummary = (props) => {
                         <p className={styles['total-label']}>Total</p>
                         <p className={styles['total-sub']}>( with delivery and other charges )</p>
                     </div>
-                    <p className={styles['total-price']}>${(props.totalPrice / 100).toFixed(2)}</p>
+                    <p className={styles['total-price']}>₱{(props.totalPrice / 100).toFixed(2)}</p>
                 </div>
                 <Button clicked={props.continuePurchase} classes="block">Proceed to Checkout</Button>
             </div>

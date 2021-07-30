@@ -19,7 +19,7 @@ const BuildControl = (props) => {
                         <button className={styles.more} onClick={props.addIngredient}>+</button>
                     </div>
 
-                    <p className={styles['price-total']}>${props.ingredientTotalPrice}</p>
+                    <p className={styles['price-total']}>₱{props.ingredientTotalPrice}</p>
                 </div>
             </div>
         </div>

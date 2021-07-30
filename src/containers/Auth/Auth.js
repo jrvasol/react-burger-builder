@@ -16,7 +16,7 @@ export const Auth = (props) => {
 
     useEffect(() => {
         props.onAuthFail();
-    }, []);
+    });
 
     const [controls] = useState({
         email: {

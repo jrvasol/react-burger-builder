@@ -1,4 +1,5 @@
 import {ADD_INGREDIENT, REMOVE_INGREDIENT, SET_INGREDIENTS, SET_INGREDIENTS_FAILED} from '../actions/actionTypes';
+import {v4} from 'uuid';
 
 const initialState = {
     ingredients: null,
@@ -12,7 +13,10 @@ const burgerBuilder = (state = initialState, action) => {
     switch (action.type) {
         case ADD_INGREDIENT:
             {
-                const activeIngs = [action.ingredient, ...state.activeIngredients];
+                const newIng = {id: v4(), type: action.ingredient }
+                const activeIngs = [
+                    newIng, ...state.activeIngredients
+                ];
 
                 return {
                     ...state,
@@ -24,7 +28,7 @@ const burgerBuilder = (state = initialState, action) => {
         case REMOVE_INGREDIENT:
             {
                 const updatedIngredients = [...state.activeIngredients];
-                const idx = state.activeIngredients.findIndex((type) => type === action.ingredient);
+                const idx = state.activeIngredients.findIndex((ing) => ing.type === action.ingredient);
                 updatedIngredients.splice(idx, 1);
 
                 return {
@@ -40,7 +44,7 @@ const burgerBuilder = (state = initialState, action) => {
                 return {
                     ...state,
                     ingredients: action.ingredients,
-                    activeIngredients: ['meat', 'cheese', 'pickles', 'tomato', 'salad', 'onion'],
+                    activeIngredients: [],
                     totalPrice: 400,
                     error: false,
                     building: false

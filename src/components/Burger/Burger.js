@@ -5,8 +5,12 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const Burger = (props) => {
     const ingLength = props.activeIngredients.length + 1;
-    let ingredients = props.activeIngredients.map((type, index) => <BurgerIngredient key={type + index} type={type} zIndex={ingLength - index} classes={`${styles[props.burgerMode]} ${styles[type]}`}/>);
-    
+    let ingredients = props.activeIngredients.map(({id, type}, index) => {
+        return (
+            <BurgerIngredient key={id} type={type} zIndex={ingLength - index} classes={`${styles[props.burgerMode]} ${styles[type]}`}/>
+        )
+    })
+     
     if(ingredients.length === 0) {
         ingredients = <h3 className={styles['placeholder']}>Please start adding ingredients!</h3>;
     }

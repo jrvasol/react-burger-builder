@@ -34,3 +34,5 @@ export const getValidation = (validation) => {
             return "";
     }
 }
+
+export const getIngredientCount = (ingredient, type) => ingredient.filter(ing => ing.type === type).length;

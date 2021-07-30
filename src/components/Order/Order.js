@@ -1,17 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import {getIngredientCount} from '../../shared/utility';
 
 const Order = (props) => {
-    const ingredients = [];
-    for (const [key,
-        value]of Object.entries(props.ingredients)) {
-        ingredients.push({ingredient: key, amount: value});
-    }
+    let countedIngredients = [];
+    Object.keys(props.ing).map((type) => (
+        countedIngredients.push({type, count: getIngredientCount(props.ingredients, type)})
+    ));
 
-    const transformedIngredients = ingredients.map((data) => {
-        return (
-            <li key={data.ingredient}>{data.ingredient} ({data.amount})</li>
-        );
-    });
+    const transformedIngredients = countedIngredients.map(ing => (ing.count !== 0 && <li key={ing.type}>{ing.type} ({ing.count})</li>));
 
     return (
         <div>
@@ -19,9 +16,13 @@ const Order = (props) => {
             <ul>
                 {transformedIngredients}
             </ul>
-            <p>Price: <strong>USD {(props.price / 100).toFixed(2)}</strong></p>
+            <p>Price: <strong>₱{(props.price / 100).toFixed(2)}</strong></p>
         </div>
     )
 };
 
-export default Order;
+const mapStateToProps = ({burgerBuilder}) => ({
+    ing: burgerBuilder.ingredients
+})
+
+export default connect(mapStateToProps)(Order);

@@ -17,7 +17,7 @@ export const Signup = (props) => {
 
     useEffect(() => {
         props.onAuthFail();
-    }, []);
+    });
 
     const password = useRef({});
     password.current = watch("password", "");
